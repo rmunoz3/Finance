@@ -1,0 +1,14 @@
+<!-- templates/visualizacion.html -->
+<html>
+<head>
+    <title>Visualización de Datos</title>
+</head>
+<body>
+    <h1>Visualización de Datos</h1>
+    {% if grafico %}
+        <img src="data:image/png;base64,{{ grafico }}" />
+    {% else %}
+        <p>No hay datos para mostrar.</p>
+    {% endif %}
+</body>
+</html>

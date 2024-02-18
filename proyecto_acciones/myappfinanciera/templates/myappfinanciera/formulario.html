@@ -1,0 +1,88 @@
+<!-- templates/tu_template.html -->
+<html>
+<head>
+    <title>Mi Formulario de Acciones</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #666;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    }
+
+    input[type="submit"] {
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #4cae4c;
+    }
+
+    p {
+        background-color: #dff0d8;
+        color: #3c763d;
+        padding: 10px;
+        border-radius: 4px;
+    }
+</style>
+<body>
+    <h1>Formulario de Acciones</h1>
+    <form method="post">
+        <!-- //el metodo post es para que no se vean los datos en la url -->
+        {% csrf_token %}
+        
+        <!-- /*esto es para que no se pueda acceder a la pagina sin pasar por el formulario, el csrf significa cross site request forgery -->
+        <label for="ticker">Ticker:</label>
+        <input type="text" name="ticker" id="ticker" required><br><br>
+        
+        <label for="fecha_inicio">Fecha de inicio:</label>
+        <input type="date" name="fecha_inicio" id="fecha_inicio" required><br><br>
+
+        <label for="fecha_fin">Fecha de fin:</label>
+        <input type="date" name="fecha_fin" id="fecha_fin" required><br><br>
+
+        <input type="submit" value="Obtener Datos">
+    </form>
+
+    <form method="get" action="/acciones/visualizar/">
+        <input type="text" name="ticker" id="ticker_vis" placeholder="Ingrese Ticker para Visualizar" required>
+        <input type="submit" value="Visualizar Datos">
+    </form>
+    <!-- //este siguiente bloque de codigo la palabra mensaje viene de la vista -->
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+</body>
+</html>
